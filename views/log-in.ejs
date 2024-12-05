@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Log In</title>
+</head>
+
+<body>
+    <h1>Log In</h1>
+
+    <% if (locals.currentUser) { %>
+        <p>Welcome back, <%= locals.currentUser.username %>!</p>
+        <a href="/log-out">Log Out</a>
+        <% } else { %>
+            <p>Please log in to access your account.</p>
+
+            <form action="/log-in" method="POST">
+                <label for="username">Username: </label>
+                <input id="username" name="username" required type="text" placeholder="username">
+
+                <label for="password">Password: </label>
+                <input id="password" name="password" required type="password" placeholder="password">
+                <button>Log In</button>
+            </form>
+
+            <% } %>
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Join the Clerb</title>
+</head>
+
+<body>
+    <h1>Join the Club</h1>
+    <% if (locals.currentUser) { %>
+
+        <p>Hello, <%= locals.currentUser.username %>
+        </p>
+
+        <!-- check if logged in user is a member -->
+        <!-- if member -->
+        <!-- "you're already a member!" -->
+        <!-- if not a member -->
+        <!-- "Enter the secret code to become a member" -->
+
+        <% if (locals.currentUser.membershipstatus) { %>
+            <p>you're already a member! welcome to the club</p>
+            <% } else { %>
+                <p>Enter the secret code to join the club</p>
+                <form action="" method="POST">
+                    <label for="">Secret Code: </label>
+                    <input type="text" id="secret" name="secret" required>
+                    <button>Join the Club</button>
+                </form>
+                <% } %>
+                    <% } else { %>
+                        <p>Log In first to join the club!</p>
+                        <a href="/log-in">Log In</a>
+
+                        <% } %>
+
+
+</body>
+
+</html>
+<!-- @todo: set up protected route -->

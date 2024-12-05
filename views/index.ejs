@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Home - Index</title>
+</head>
+
+<body>
+    <h1>Home Page - Members Only</h1>
+
+    <a href="/sign-up">Sign Up</a>
+    <% if (locals.currentUser) { %>
+        <a href="/log-out">Log Out</a>
+        <% } else { %>
+            <a href="/log-in">Log In</a>
+            <% } %>
+
+                <% if (locals.currentUser) { %>
+                    <a href="/message/new">Post New Message</a>
+                    <p>Hello, <%= locals.currentUser.username %>
+                    </p>
+                    <p>Membership status: <%= locals.currentUser.membershipstatus %>
+                    </p>
+
+                    <% if (successMessage) { %>
+                        <p style="color: green;">
+                            <%= successMessage %>
+                        </p>
+                        <% } %>
+
+                            <% if (!locals.currentUser.membershipstatus) { %>
+                                <a href="/join">Join the Club</a>
+                                <% } %>
+                                    <% } %>
+
+                                        <% if (!locals.currentUser) { %>
+                                            <p>Not Logged In!</p>
+                                            <% } %>
+
+                                                <h2>Messages:</h2>
+
+                                                <% if (locals.messages) { %>
+                                                    <% locals.messages.forEach((item)=> { %>
+                                                        <div>
+                                                            <p>Title: <%= item.title %>
+                                                            </p>
+                                                            <p>Message Text: <%= item.text %>
+                                                            </p>
+
+                                                            <% if (locals.currentUser) { %>
+                                                                <% if (locals.currentUser.membershipstatus) { %>
+                                                                    <p>Timestamp: <%= item.timestamp %>
+                                                                    </p>
+                                                                    <p>Author: <%= item.author.username %>
+                                                                    </p>
+                                                                    <% } %>
+                                                                        <% } %>
+
+                                                                            <% if (locals.currentUser &&
+                                                                                locals.currentUser.role==='admin' ) { %>
+                                                                                <form
+                                                                                    action="/message/delete/<%= item.id %>"
+                                                                                    method="POST">
+                                                                                    <button
+                                                                                        type="submit">Delete</button>
+                                                                                </form>
+                                                                                <% } %>
+
+                                                                                    <hr>
+                                                        </div>
+                                                        <% }) %>
+                                                            <% } else { %>
+                                                                <p>No messages available.</p>
+                                                                <% } %>
+
+
+
+</body>
+
+</html>
