@@ -8,30 +8,34 @@
 
 <body>
     <h1>Sign Up</h1>
-    <form action="" method="POST">
-
-        <label for="firstname"> First Name </label>
-        <input id="firstname" name="firstname" required type="text">
-        <br />
-
-        <label for="lastname"> Last Name </label>
-        <input id="lastname" name="lastname" required type="text">
-        <br />
+    <% if (locals.currentUser) { %>
+        <p>you're already logged in!</p>
+        <a href="/">Go back home</a>
+        <% } else { %>
 
 
-        <label for="username"> Username </label>
-        <input id="username" name="username" required type="text">
-        <br />
+            <form action="" method="POST">
+                <label for="firstname"> First Name </label>
+                <input id="firstname" name="firstname" required type="text">
+                <br />
+
+                <label for="lastname"> Last Name </label>
+                <input id="lastname" name="lastname" required type="text">
+                <br />
 
 
-        <label for="password"> Password:</label>
-        <input id="password" name="password" required type="password">
-        <br />
+                <label for="username"> Username </label>
+                <input id="username" name="username" required type="text">
+                <br />
 
 
+                <label for="password"> Password:</label>
+                <input id="password" name="password" required type="password">
+                <br />
+                <button>Sign Up</button>
+            </form>
 
-        <button>Sign Up</button>
-    </form>
+            <% } %>
 
 </body>
 

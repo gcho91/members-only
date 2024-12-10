@@ -63,6 +63,9 @@ exports.getIndex = async (req, res, next) => {
 };
 
 exports.getSignUp = (req, res) => {
+  // if user is already signed up ( logged in)
+  // "you're already signed up! "
+  // redirect
   res.render("sign-up", {});
 };
 

@@ -94,3 +94,9 @@ app.use(authRoutes);
 // app.use(userRoutes);
 
 app.listen(3000, () => console.log("express app listening on port 3000"));
+
+// @Todo: admin
+// - only admin users can see delete button next to messages
+// - admin users can delete messages
+// - users see confirmation prompt before deleting messages
+// - can toggle users admin

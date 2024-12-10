@@ -27,3 +27,15 @@ exports.postNewMessage = async (req, res, next) => {
     return next(err);
   }
 };
+
+exports.deleteMessage = async (req, res, next) => {
+  const messageId = req.params.messageId;
+
+  try {
+    await pool.query("DELETE FROM messages WHERE id = $1", [messageId]);
+    res.json({ message: "Message deleted successfully" }); // Send JSON response (adjust based on your needs)
+  } catch (err) {
+    console.error("Error deleting message ", err);
+    res.status(500).send("Server Error");
+  }
+};

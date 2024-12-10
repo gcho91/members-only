@@ -5,13 +5,14 @@ const express = require("express");
 const authController = require("../controllers/authController");
 const userController = require("../controllers/userController");
 const messageController = require("../controllers/messageController");
-const { ensureMembership } = require("../middleware/checkAuth");
+const { ensureMembership, ensureAdmin } = require("../middleware/checkAuth");
 
 const router = express.Router();
 
 // Routes
 router.get("/", authController.getIndex);
 router.get("/sign-up", authController.getSignUp);
+
 router.post("/sign-up", authController.signUp);
 router.get("/log-in", authController.getLogin);
 router.post("/log-in", authController.login);
@@ -22,6 +23,11 @@ router.post("/join", userController.postJoin);
 
 router.get("/message/new", messageController.getNewMessage);
 router.post("/message/new", messageController.postNewMessage);
+router.post(
+  "/message/delete/:messageId",
+  ensureAdmin,
+  messageController.deleteMessage
+);
 
 module.exports = router;
 

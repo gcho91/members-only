@@ -9,4 +9,11 @@ function ensureMembership(req, res, next) {
   res.redirect("/log-in");
 }
 
-module.exports = { ensureAuthenticated, ensureMembership };
+function ensureAdmin(req, res, next) {
+  if (req.isAuthenticated() && req.user.admin === true) {
+    return next();
+  }
+  res.status(403).json({ message: "Unauthorized: Requires admin privileges" }); // Send JSON response with error message
+}
+
+module.exports = { ensureAuthenticated, ensureMembership, ensureAdmin };
